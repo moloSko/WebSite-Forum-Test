@@ -1,0 +1,544 @@
+/*--------------------------------Форум основная страница------------------------------------------------*/
+
+*{
+	box-sizing: border-box; /*Свойства width и height включают в себя значения полей и границ, но не отступов (margin)*/
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+body{
+	margin: 0;
+	background-image: url(../img/backgro.png);
+}
+
+.container{
+	max-width: 1240px;
+	margin: 0 auto;
+	padding-top: 60px;
+	padding-bottom: 80px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+@media (max-width: 1250px){
+	.sidebar{
+		display: none;
+	}
+	.footer_raw{
+		font-size: 8px;
+	}
+}
+
+.row {
+	display: flex;
+	justify-content: center;
+}
+
+.main{
+	width: 870px;
+	height: auto;
+}
+
+.razdel_administr{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	background-color: #1a1a1a;
+	backdrop-filter: blur(5px);
+	border-radius: 20px;
+	margin-bottom: 16px;
+}
+
+.sidebar_razdel_administr{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #1a1a1a;
+	backdrop-filter: blur(5px);
+	border-radius: 20px;
+	margin-bottom: 16px;
+}
+
+/*-------------Начало добав разделов---------------------*/
+
+.poz_cread_razd{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	height: 38px;
+	margin-bottom: 14;
+}
+
+.creat_razd{
+	margin: 3px;
+	width: 135px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(26 26 26);
+	border-color: #008a77;
+	border-radius: 10px;
+	border: 2px solid #ffffff;
+}
+
+.but_raz_add{
+	width: 100%;
+  height: 100%;
+	color: #ffffff;
+	font-family: 'Cuprum', sans-serif;
+	font-size: 16px;
+	font-weight:bold;
+	outline: none; /* Для синий ободки */
+	border: 0;
+	background: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.but_raz_add:hover{
+	cursor: pointer;
+}
+
+.pozic_but_podraz{
+	display: flex;
+	justify-content: space-between;
+}
+
+
+.but_podraz_add{
+	color: #ffffff;
+	font-family: 'Cuprum', sans-serif;
+	font-size: 16px;
+	font-weight:bold;
+	outline: none; /* Для синий ободки */
+	border: 0;
+	background: transparent;
+	text-decoration: none;
+}
+
+.but_podraz_add:hover{
+	cursor: pointer;
+}
+
+/*--------------Конец добавления раздела-------------------*/
+
+/*--------------Начало модального окна раздела-------------------*/
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    overflow: auto;
+    visibility:hidden;
+    opacity: 0;
+    transition: opacity 0.7s ease-in 0s;
+}
+.popup {
+    top: 10%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 90%;
+    min-width: 200px;
+    max-width: 870px;
+    position: absolute;
+    padding: 15px 20px;
+    background-color: rgb(8, 8, 8, 1);
+    z-index: 1000;
+    border-radius: 10px;
+    font: 16px/18px 'Cuprum', sans-serif, Arial, sans-serif;
+    box-shadow: 0 0px 14px rgba(0, 0, 0, 0.4);
+		color: #FFFFFF;
+}
+.close {
+    top: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    border: none;
+    border-radius: 40%;
+    background-color: rgba(0, 0, 0, 0.9);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    outline: none;
+}
+.close:before {
+    color: rgba(255, 255, 255, 0.9);
+    content: "X";
+    font-family:  Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    text-decoration: none;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.9);
+}
+.close:hover {
+    background-color: rgba(180, 20, 14, 0.8);
+}
+#overlay .popup p.zag{margin:20px 0 10px;padding:0 0 6px;color:tomato;font-size:16px;font-weight:bold;border-bottom:1px solid tomato;}
+
+.relev_poz{
+}
+
+
+[data-tooltip] {
+    position: relative; /* Относительное позиционирование */
+   }
+   [data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    width: 200px;
+    left: 0; top: 0;
+    background: #992929;
+    color: #fff;
+    padding: 0.3em;
+    pointer-events: none;
+    opacity: 0;
+    transition: 1s;
+		border-radius: 6px;
+   }
+   [data-tooltip]:hover::after {
+    opacity: 1;
+    top: -2em;
+   }
+
+.neobh_razd{
+		color: #ff0000;
+}
+
+.form_decorate{
+	color: white;
+	background-color: #1a1a1a;
+	border:none;
+	height: 26px;
+	width: 260px;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	margin-left: 5px;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.img_form_decor{
+	margin-top: 10px;
+	margin-bottom: 15px;
+	margin-left: 5px;
+	background-color: #220d0d;
+	border-radius: 10px;
+}
+
+.add_razd{
+	 border-bottom: 1px solid tomato;
+	 margin-bottom: 10;
+}
+/*-------------Модальное окно выше-------------------*/
+
+.admipssection{
+	display: block;
+	text-decoration: none;
+	font-family: 'Kanit', sans-serif;
+	padding-left: 19px;
+	padding-top: 10px;
+	padding-bottom: 35px;
+	color: white;
+	width: 150px;
+	height: 23px;
+}
+
+.admipssection:hover{
+	text-shadow: red 0 0 20px;
+}
+
+.admipssection_one{
+	display: block;
+	text-decoration: none;
+	font-family: 'Kanit', sans-serif;
+	padding-left: 19px;
+	padding-top: 10px;
+	padding-bottom: 35px;
+	color: white;
+	text-shadow: black 15 0 100px;
+	width: 230px;
+	height: 23px;
+}
+
+.admipssection_one:hover{
+	text-shadow: red 0 0 20px;
+}
+
+/*---------------------------------------*/
+
+.chat_administr{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	background-color: #1a1a1a;
+	backdrop-filter: blur(5px);
+	border-radius: 20px;
+	margin-bottom: 16px;
+}
+
+.admipssection_chat{
+	display: block;
+	text-decoration: none;
+	font-family: 'Kanit', sans-serif;
+	padding-left: 19px;
+	padding-top: 10px;
+	padding-bottom: 35px;
+	color: white;
+	width: 230px;
+	height: 23px;
+}
+
+
+.chat_block_text{
+	color: white;
+	height: 250px;
+}
+
+
+.chat_inp{
+	padding: 10px 10px;
+	min-width: 100%;
+}
+
+.chatInput{
+	display: flex;
+	padding: 5px 5px;
+	min-width: 100%;
+	color: white;
+	background-color: #1a1a1a;
+	border:none;
+}
+
+input:focus {
+border:none;
+outline: none !important;
+}
+
+.sidebar_admipssection_one{
+	text-decoration: none;
+	font-family: 'Kanit', sans-serif;
+	padding-left: 19px;
+	padding-top: 10px;
+	padding-bottom: 35px;
+	color: white;
+	width: 230px;
+	height: 23px;
+}
+
+
+.razdeles{
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+
+.pod_admipssection{
+	display: block;
+	text-decoration: none;
+	font-family: 'Cuprum', sans-serif;
+	font-size: 19px;
+	color: white;
+	padding-top: 13px;
+	padding-bottom: 13px;
+}
+
+
+.razd_img{
+	padding-right: 15px;
+}
+
+
+
+.razdel_img{
+	height: 33px;
+	width: 33px;
+	filter: sepia(100%);
+	transition-duration: .4s;
+
+}
+
+.razdel_img:hover{
+	height: 39px;
+	width: 39px;
+
+}
+
+.zaloba{
+	display: flex;
+	align-items: center;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+.zaloba:hover{
+	text-shadow: red 0 0 20px;
+}
+
+.side_zaloba{
+	display: flex;
+	align-items: center;
+	padding-bottom: 20px;
+}
+
+.sidebar{
+	width: auto;
+    height: auto;
+	margin-left: 5px;
+}
+
+
+.sidebar_obyav{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #1a1a1a;
+	border-radius: 12px;
+}
+
+.side_ob_h{
+	color: white;
+	text-decoration: none;
+	font-family: 'Kanit', sans-serif;
+	font-size: 14px;
+	text-shadow: white 0 0 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+	text-align: center;
+}
+
+.side_ob_zg{
+	display: block;
+	color: white;
+	text-decoration: none;
+	font-family: 'Kanit', sans-serif;
+	font-size: 14px;
+	padding-left: 20px;
+	padding-right: 20px;
+	text-align: center;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	border-left: 2px solid #0058ff;
+    border-right: 2px solid #0058ff;
+}
+
+
+.side_ob_zg:hover{
+	transition-duration: .4s;
+	background-color: rgba(0, 71, 204, 0.4);
+}
+
+.sidebar_tem{
+	display: flex;
+	flex-direction: column;
+	background-color: #1a1a1a;
+	border-radius: 12px;
+	margin-top: 8px;
+}
+
+.side_tem{
+	color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+    font-family: 'Kanit', sans-serif;
+    padding: 10px;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.polzovatel{
+	display: flex;
+	align-items: center;
+	padding: 5px 20px;
+	margin-bottom: 20px;
+
+}
+
+
+.side_tem_img{
+	display: block;
+	height: 48px;
+	width: 48px;
+	border-radius: 24px;
+}
+
+.component_polzov{
+	color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding-left: 18px;
+	font-family: GT Eesti Pro Light, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.name_razdel{
+	text-decoration: none;
+	color: #dedede;
+	font-size: 13px;
+	padding-bottom: 5px;
+}
+
+
+.name_razdel:hover{
+	transition-duration: .4s;
+	color: rgb(0, 88, 255, 0.7);
+}
+
+
+.sozd_news{
+	margin: 0;
+	font-size: 12px;
+}
+
+.raw{
+	display: flex;
+	justify-content: space-around;
+}
+
+/*---------------------------------------*/
+
+.footer_raw{
+	padding-top:10px;
+	color: white;
+	outline: none; /* Для синий ободки */
+  border: 0;
+  background: transparent;
+}
+
+.footer_raw:hover{
+	cursor: pointer;
+	transition-duration: .4s;
+	color: rgba(0, 71, 204, 0.9);
+}
+
+@media (min-width: 1250px){
+	.sidebar_razdel_administr{
+		display: none;
+	}
+
+	/*.chat_administr{
+		display: none;
+	}*/
+}
+
+.polsoglash{
+	margin: 25px 25px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.icopolssogl{
+	margin-right: 10px;
+}
